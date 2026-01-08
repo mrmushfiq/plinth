@@ -28,6 +28,14 @@ jobs:
         restore-keys: |
           ${{ runner.os }}-go-
 
+    - name: Verify checkout
+      run: |
+        echo "Current directory: $(pwd)"
+        echo "Directory contents:"
+        ls -la
+        echo "cmd directory:"
+        ls -la cmd/
+        
     - name: Download dependencies
       run: go mod download
 
@@ -39,6 +47,8 @@ jobs:
         go build -v -o bin/repair ./cmd/repair
         go build -v -o bin/objctl ./cmd/objctl
         go build -v -o bin/objbench ./cmd/objbench
+        echo "Build complete. Binaries created:"
+        ls -lh bin/
 
     - name: Run go vet
       run: go vet ./...

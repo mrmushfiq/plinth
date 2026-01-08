@@ -6,12 +6,12 @@
 *.dylib
 *.a
 
-# Built binaries (from cmd/)
-gateway
-datanode
-repair
-objctl
-objbench
+# Built binaries (from cmd/) - only in root directory
+/gateway
+/datanode
+/repair
+/objctl
+/objbench
 
 # Test binary, built with `go test -c`
 *.test
