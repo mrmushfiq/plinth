@@ -44,21 +44,21 @@ func (g *Gateway) errorResponse(c *gin.Context, code int, s3Code, message string
 
 // Common S3 error codes
 const (
-	ErrNoSuchBucket         = "NoSuchBucket"
-	ErrNoSuchKey            = "NoSuchKey"
-	ErrBucketAlreadyExists  = "BucketAlreadyExists"
-	ErrInvalidBucketName    = "InvalidBucketName"
-	ErrInvalidArgument      = "InvalidArgument"
-	ErrMethodNotAllowed     = "MethodNotAllowed"
-	ErrInternalError        = "InternalError"
-	ErrAccessDenied         = "AccessDenied"
-	ErrMalformedXML         = "MalformedXML"
-	ErrInvalidPart          = "InvalidPart"
-	ErrNoSuchUpload         = "NoSuchUpload"
-	ErrEntityTooLarge       = "EntityTooLarge"
-	ErrIncompleteBody       = "IncompleteBody"
-	ErrInvalidRange         = "InvalidRange"
-	ErrPreconditionFailed   = "PreconditionFailed"
+	ErrNoSuchBucket        = "NoSuchBucket"
+	ErrNoSuchKey           = "NoSuchKey"
+	ErrBucketAlreadyExists = "BucketAlreadyExists"
+	ErrInvalidBucketName   = "InvalidBucketName"
+	ErrInvalidArgument     = "InvalidArgument"
+	ErrMethodNotAllowed    = "MethodNotAllowed"
+	ErrInternalError       = "InternalError"
+	ErrAccessDenied        = "AccessDenied"
+	ErrMalformedXML        = "MalformedXML"
+	ErrInvalidPart         = "InvalidPart"
+	ErrNoSuchUpload        = "NoSuchUpload"
+	ErrEntityTooLarge      = "EntityTooLarge"
+	ErrIncompleteBody      = "IncompleteBody"
+	ErrInvalidRange        = "InvalidRange"
+	ErrPreconditionFailed  = "PreconditionFailed"
 )
 
 // Bucket Operations
@@ -87,20 +87,20 @@ func (g *Gateway) HeadBucket(c *gin.Context) {
 
 func (g *Gateway) CreateBucket(c *gin.Context) {
 	bucket := c.Param("bucket")
-	
+
 	// TODO: Validate bucket name
 	// TODO: Create bucket in metadata service
-	
+
 	_ = bucket
 	c.Status(http.StatusOK)
 }
 
 func (g *Gateway) DeleteBucket(c *gin.Context) {
 	bucket := c.Param("bucket")
-	
+
 	// TODO: Check if bucket is empty
 	// TODO: Delete bucket from metadata service
-	
+
 	_ = bucket
 	c.Status(http.StatusNoContent)
 }
@@ -113,7 +113,7 @@ func (g *Gateway) ListObjects(c *gin.Context) {
 	marker := c.Query("marker")
 
 	// TODO: Query metadata service for objects
-	
+
 	_, _, _, _ = bucket, prefix, delimiter, marker
 	_ = maxKeys
 
@@ -137,7 +137,7 @@ func (g *Gateway) HeadObject(c *gin.Context) {
 
 	// TODO: Get object metadata from metadata service
 	// TODO: Set headers: ETag, Content-Length, Content-Type, Last-Modified
-	
+
 	_, _ = bucket, key
 	c.Status(http.StatusOK)
 }
@@ -152,7 +152,7 @@ func (g *Gateway) GetObject(c *gin.Context) {
 	// TODO: Read from data node(s)
 	// TODO: Verify checksum
 	// TODO: Handle range requests
-	
+
 	_, _, _ = bucket, key, rangeHeader
 	c.Data(http.StatusOK, "application/octet-stream", []byte{})
 }
@@ -168,7 +168,7 @@ func (g *Gateway) PutObject(c *gin.Context) {
 	// TODO: Calculate checksum
 	// TODO: Store metadata
 	// TODO: Return ETag
-	
+
 	_, _, _, _ = bucket, key, contentType, contentLength
 
 	etag := "\"todo-calculate-etag\""
@@ -182,7 +182,7 @@ func (g *Gateway) DeleteObject(c *gin.Context) {
 
 	// TODO: Create delete marker in metadata service
 	// TODO: Schedule garbage collection on data nodes
-	
+
 	_, _ = bucket, key
 	c.Status(http.StatusNoContent)
 }
@@ -195,7 +195,7 @@ func (g *Gateway) InitiateMultipartUpload(c *gin.Context) {
 
 	// TODO: Create multipart upload record in metadata
 	// TODO: Generate upload ID
-	
+
 	_, _ = bucket, key
 	uploadID := "todo-generate-upload-id"
 
@@ -218,7 +218,7 @@ func (g *Gateway) UploadPart(c *gin.Context) {
 	// TODO: Get placement for this part
 	// TODO: Write part to data nodes
 	// TODO: Store part metadata
-	
+
 	_, _, _, _ = bucket, key, uploadID, partNumber
 
 	etag := "\"todo-calculate-part-etag\""
@@ -236,7 +236,7 @@ func (g *Gateway) CompleteMultipartUpload(c *gin.Context) {
 	// TODO: Create final object metadata
 	// TODO: Calculate final ETag
 	// TODO: Clean up multipart upload record
-	
+
 	_, _, _ = bucket, key, uploadID
 
 	etag := "\"todo-calculate-final-etag\""
@@ -257,7 +257,7 @@ func (g *Gateway) AbortMultipartUpload(c *gin.Context) {
 
 	// TODO: Delete multipart upload record
 	// TODO: Schedule cleanup of uploaded parts
-	
+
 	_, _, _ = bucket, key, uploadID
 	c.Status(http.StatusNoContent)
 }
@@ -268,7 +268,7 @@ func (g *Gateway) ListParts(c *gin.Context) {
 	uploadID := c.Query("uploadId")
 
 	// TODO: List parts for this multipart upload
-	
+
 	_, _, _ = bucket, key, uploadID
 
 	c.XML(http.StatusOK, gin.H{
@@ -286,7 +286,7 @@ func (g *Gateway) ListMultipartUploads(c *gin.Context) {
 	prefix := c.Query("prefix")
 
 	// TODO: List in-progress multipart uploads
-	
+
 	_, _ = bucket, prefix
 
 	c.XML(http.StatusOK, gin.H{
@@ -297,4 +297,3 @@ func (g *Gateway) ListMultipartUploads(c *gin.Context) {
 		},
 	})
 }
-

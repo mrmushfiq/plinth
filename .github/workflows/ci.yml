@@ -33,11 +33,12 @@ jobs:
 
     - name: Build all binaries
       run: |
-        go build -v ./cmd/gateway
-        go build -v ./cmd/datanode
-        go build -v ./cmd/repair
-        go build -v ./cmd/objctl
-        go build -v ./cmd/objbench
+        mkdir -p bin
+        go build -v -o bin/gateway ./cmd/gateway
+        go build -v -o bin/datanode ./cmd/datanode
+        go build -v -o bin/repair ./cmd/repair
+        go build -v -o bin/objctl ./cmd/objctl
+        go build -v -o bin/objbench ./cmd/objbench
 
     - name: Run go vet
       run: go vet ./...

@@ -16,31 +16,31 @@ const (
 
 // Object represents an object in the metadata store
 type Object struct {
-	ID           string
-	BucketName   string
-	ObjectKey    string
-	VersionID    string
-	IsLatest     bool
+	ID             string
+	BucketName     string
+	ObjectKey      string
+	VersionID      string
+	IsLatest       bool
 	IsDeleteMarker bool
-	SizeBytes    int64
-	ETag         string
-	ContentType  string
-	Placement    []string // Node IDs where replicas exist
-	State        ObjectState
-	Metadata     map[string]string
-	Tags         map[string]string
-	CreatedAt    time.Time
-	UpdatedAt    time.Time
+	SizeBytes      int64
+	ETag           string
+	ContentType    string
+	Placement      []string // Node IDs where replicas exist
+	State          ObjectState
+	Metadata       map[string]string
+	Tags           map[string]string
+	CreatedAt      time.Time
+	UpdatedAt      time.Time
 }
 
 // Bucket represents a bucket in the metadata store
 type Bucket struct {
-	ID                 string
-	Name               string
-	VersioningEnabled  bool
-	Region             string
-	CreatedAt          time.Time
-	UpdatedAt          time.Time
+	ID                string
+	Name              string
+	VersioningEnabled bool
+	Region            string
+	CreatedAt         time.Time
+	UpdatedAt         time.Time
 }
 
 // Service defines the interface for metadata operations
@@ -60,8 +60,7 @@ type Service interface {
 
 	// Placement operations
 	UpdateObjectPlacement(ctx context.Context, objectID string, nodeIDs []string) error
-	
+
 	// Repair operations
 	FindUnderReplicatedObjects(ctx context.Context, replicationFactor int) ([]*Object, error)
 }
-

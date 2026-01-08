@@ -8,10 +8,10 @@ import (
 var (
 	// ErrInsufficientNodes is returned when not enough nodes are available
 	ErrInsufficientNodes = errors.New("insufficient nodes available for quorum")
-	
+
 	// ErrWriteQuorumNotMet is returned when write quorum is not satisfied
 	ErrWriteQuorumNotMet = errors.New("write quorum not met")
-	
+
 	// ErrReadQuorumNotMet is returned when read quorum is not satisfied
 	ErrReadQuorumNotMet = errors.New("read quorum not met")
 )
@@ -56,4 +56,3 @@ func ValidateConfig(cfg Config) error {
 	}
 	return nil
 }
-

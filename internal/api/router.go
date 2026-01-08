@@ -164,12 +164,12 @@ func nodesStatusHandler(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{
 		"nodes": []gin.H{
 			{
-				"id":              "node1",
-				"status":          "healthy",
-				"total_disk_gb":   1000,
-				"used_disk_gb":    450,
-				"object_count":    15234,
-				"last_heartbeat":  "2026-01-08T12:00:00Z",
+				"id":             "node1",
+				"status":         "healthy",
+				"total_disk_gb":  1000,
+				"used_disk_gb":   450,
+				"object_count":   15234,
+				"last_heartbeat": "2026-01-08T12:00:00Z",
 			},
 		},
 	})
@@ -201,10 +201,9 @@ func topObjectsHandler(c *gin.Context) {
 func repairStatusHandler(c *gin.Context) {
 	// TODO: Query repair worker status
 	c.JSON(http.StatusOK, gin.H{
-		"status": "running",
-		"last_run": "2026-01-08T11:55:00Z",
+		"status":           "running",
+		"last_run":         "2026-01-08T11:55:00Z",
 		"objects_repaired": 0,
 		"under_replicated": 0,
 	})
 }
-

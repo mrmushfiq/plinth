@@ -104,4 +104,3 @@ func generateRequestID() string {
 	// For now, use timestamp-based ID
 	return "req-" + time.Now().Format("20060102150405.000000")
 }
-

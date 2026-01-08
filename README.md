@@ -2,10 +2,13 @@
 
 > Cost-aware, self-healing object storage built for ML workloads and on-prem clusters
 
+[![Development Status](https://img.shields.io/badge/status-alpha-orange.svg)](https://github.com/mrmushfiq/plinth)
+[![Project Stage](https://img.shields.io/badge/project%20stage-bootstrap-blue.svg)](https://github.com/mrmushfiq/plinth)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Go Version](https://img.shields.io/badge/Go-1.21+-00ADD8?style=flat&logo=go)](https://golang.org)
 [![CI](https://github.com/mrmushfiq/plinth/workflows/CI/badge.svg)](https://github.com/mrmushfiq/plinth/actions)
 [![Go Report Card](https://goreportcard.com/badge/github.com/mrmushfiq/plinth)](https://goreportcard.com/report/github.com/mrmushfiq/plinth)
+[![Contributions Welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg)](CONTRIBUTING.md)
 
 **Plinth** is an open-source, S3-compatible distributed object storage system designed for AI/ML workloads and on-premises clusters. Unlike traditional object stores, Plinth provides built-in cost tracking, intelligent tiering, and transparent self-healing capabilities.
 
@@ -185,5 +188,23 @@ Inspired by:
 
 ---
 
-**Status**: 🚧 Early Development - Not ready for production use
+## 🚧 Project Status
+
+**Current Phase**: Bootstrap / Early Development (Week 1 of 12-week plan)
+
+This project is in **active development** and not yet ready for production use. We're building:
+
+- ✅ Project structure and foundations (Complete)
+- ✅ API gateway with S3-compatible routes (Complete)
+- 🔨 Data node implementation (In Progress)
+- ⏳ Replication and consistency (Planned)
+- ⏳ Self-healing repair worker (Planned)
+
+**Want to contribute?** Check out our [Contributing Guide](CONTRIBUTING.md) and [Project Plan](plinth_project_plan.md)!
+
+**Roadmap**: See our [12-week implementation plan](plinth_project_plan.md) for detailed milestones.
+
+---
+
+**⚠️ Not Production Ready** - This is alpha software under active development
 

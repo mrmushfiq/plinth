@@ -45,6 +45,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Switched from stdlib `net/http` mux to Gin framework for better performance and features
 - Simplified CI workflow to minimal build verification (moved full CI to template for later use)
 
+### Fixed
+- Removed unused imports in cmd/datanode (context)
+- Fixed unused variable warnings in cmd/repair and cmd/gateway
+- Removed redundant newlines in fmt.Println calls (cmd/objctl, cmd/objbench)
+- Fixed CI workflow to create bin/ directory before building
+- Applied gofmt formatting to all Go files
+
 ### Technical Details
 
 **Framework Choice: Gin**

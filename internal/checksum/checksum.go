@@ -19,7 +19,7 @@ const (
 type Calculator interface {
 	// Calculate computes checksum from a reader
 	Calculate(r io.Reader) (string, error)
-	
+
 	// Verify checks if data matches the expected checksum
 	Verify(r io.Reader, expected string) (bool, error)
 }
@@ -64,4 +64,3 @@ func NewHash(algo Algorithm) hash.Hash {
 		return xxhash.New()
 	}
 }
-
