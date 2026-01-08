@@ -12,7 +12,7 @@ Get Plinth up and running in 5 minutes.
 ### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/mushfiq/plinth.git
+git clone https://github.com/mrmushfiq/plinth.git
 cd plinth
 ```
 
@@ -85,7 +85,7 @@ brew install go
 ### 2. Clone and Build
 
 ```bash
-git clone https://github.com/mushfiq/plinth.git
+git clone https://github.com/mrmushfiq/plinth.git
 cd plinth
 
 # Download dependencies
@@ -229,7 +229,7 @@ Or change ports in `docker-compose.yml`.
 
 ## Getting Help
 
-- GitHub Issues: https://github.com/mushfiq/plinth/issues
-- Discussions: https://github.com/mushfiq/plinth/discussions
-- Documentation: https://github.com/mushfiq/plinth/tree/main/docs
+- GitHub Issues: https://github.com/mrmushfiq/plinth/issues
+- Discussions: https://github.com/mrmushfiq/plinth/discussions
+- Documentation: https://github.com/mrmushfiq/plinth/tree/main/docs
 

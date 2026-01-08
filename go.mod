@@ -1,4 +1,4 @@
-module github.com/mushfiq/plinth
+module github.com/mrmushfiq/plinth
 
 go 1.21
 

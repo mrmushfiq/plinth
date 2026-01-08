@@ -20,7 +20,7 @@ Be respectful, inclusive, and constructive. We're building something useful toge
 1. **Fork and clone the repository**
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/plinth.git
+git clone https://github.com/mrmushfiq/plinth.git
 cd plinth
 ```
 

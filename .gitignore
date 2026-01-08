@@ -132,6 +132,7 @@ kustomization.yaml.bak
 # Project-specific
 plinth_project_plan.md
 GETTING_STARTED.md.backup
+SETUP_COMPLETE.md
 
 # Temporary download/upload testing
 /uploads/

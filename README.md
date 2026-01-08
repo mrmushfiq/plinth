@@ -4,6 +4,8 @@
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Go Version](https://img.shields.io/badge/Go-1.21+-00ADD8?style=flat&logo=go)](https://golang.org)
+[![CI](https://github.com/mrmushfiq/plinth/workflows/CI/badge.svg)](https://github.com/mrmushfiq/plinth/actions)
+[![Go Report Card](https://goreportcard.com/badge/github.com/mrmushfiq/plinth)](https://goreportcard.com/report/github.com/mrmushfiq/plinth)
 
 **Plinth** is an open-source, S3-compatible distributed object storage system designed for AI/ML workloads and on-premises clusters. Unlike traditional object stores, Plinth provides built-in cost tracking, intelligent tiering, and transparent self-healing capabilities.
 
@@ -19,7 +21,7 @@
 
 ```bash
 # Clone the repository
-git clone https://github.com/mushfiq/plinth.git
+git clone https://github.com/mrmushfiq/plinth.git
 cd plinth
 
 # Start local cluster with docker-compose
@@ -178,8 +180,8 @@ Inspired by:
 
 ## 📬 Contact
 
-- GitHub Issues: [github.com/mushfiq/plinth/issues](https://github.com/mushfiq/plinth/issues)
-- Project Maintainer: [@mushfiq](https://github.com/mushfiq)
+- GitHub Issues: [github.com/mrmushfiq/plinth/issues](https://github.com/mrmushfiq/plinth/issues)
+- Project Maintainer: [@mrmushfiq](https://github.com/mrmushfiq)
 
 ---
 

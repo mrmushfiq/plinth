@@ -43,6 +43,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 - Switched from stdlib `net/http` mux to Gin framework for better performance and features
+- Simplified CI workflow to minimal build verification (moved full CI to template for later use)
 
 ### Technical Details
 
