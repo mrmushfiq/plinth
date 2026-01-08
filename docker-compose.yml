@@ -1,0 +1,137 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:14-alpine
+    container_name: plinth-postgres
+    environment:
+      POSTGRES_DB: plinth
+      POSTGRES_USER: plinth
+      POSTGRES_PASSWORD: plinth_dev_password
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./deploy/sql/init.sql:/docker-entrypoint-initdb.d/init.sql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U plinth"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  datanode1:
+    build:
+      context: .
+      dockerfile: deploy/Dockerfile.datanode
+    container_name: plinth-datanode1
+    environment:
+      NODE_ID: node1
+      DATA_DIR: /data
+      GRPC_PORT: 50051
+    ports:
+      - "50051:50051"
+    volumes:
+      - datanode1_data:/data
+    healthcheck:
+      test: ["CMD", "/app/datanode", "health"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+
+  datanode2:
+    build:
+      context: .
+      dockerfile: deploy/Dockerfile.datanode
+    container_name: plinth-datanode2
+    environment:
+      NODE_ID: node2
+      DATA_DIR: /data
+      GRPC_PORT: 50052
+    ports:
+      - "50052:50052"
+    volumes:
+      - datanode2_data:/data
+    healthcheck:
+      test: ["CMD", "/app/datanode", "health"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+
+  datanode3:
+    build:
+      context: .
+      dockerfile: deploy/Dockerfile.datanode
+    container_name: plinth-datanode3
+    environment:
+      NODE_ID: node3
+      DATA_DIR: /data
+      GRPC_PORT: 50053
+    ports:
+      - "50053:50053"
+    volumes:
+      - datanode3_data:/data
+    healthcheck:
+      test: ["CMD", "/app/datanode", "health"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+
+  gateway:
+    build:
+      context: .
+      dockerfile: deploy/Dockerfile.gateway
+    container_name: plinth-gateway
+    environment:
+      HTTP_PORT: 9000
+      DB_HOST: postgres
+      DB_PORT: 5432
+      DB_NAME: plinth
+      DB_USER: plinth
+      DB_PASSWORD: plinth_dev_password
+      DATA_NODES: "datanode1:50051,datanode2:50052,datanode3:50053"
+      REPLICATION_FACTOR: 3
+      WRITE_QUORUM: 2
+      READ_QUORUM: 2
+    ports:
+      - "9000:9000"
+    depends_on:
+      postgres:
+        condition: service_healthy
+      datanode1:
+        condition: service_started
+      datanode2:
+        condition: service_started
+      datanode3:
+        condition: service_started
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:9000/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  repair:
+    build:
+      context: .
+      dockerfile: deploy/Dockerfile.repair
+    container_name: plinth-repair
+    environment:
+      DB_HOST: postgres
+      DB_PORT: 5432
+      DB_NAME: plinth
+      DB_USER: plinth
+      DB_PASSWORD: plinth_dev_password
+      DATA_NODES: "datanode1:50051,datanode2:50052,datanode3:50053"
+      REPAIR_INTERVAL: 60s
+      SCRUB_INTERVAL: 300s
+    depends_on:
+      postgres:
+        condition: service_healthy
+      gateway:
+        condition: service_healthy
+
+volumes:
+  postgres_data:
+  datanode1_data:
+  datanode2_data:
+  datanode3_data:
+

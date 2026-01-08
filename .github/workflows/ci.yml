@@ -1,0 +1,145 @@
+name: CI
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main, develop ]
+
+jobs:
+  test:
+    name: Test
+    runs-on: ubuntu-latest
+    
+    services:
+      postgres:
+        image: postgres:14-alpine
+        env:
+          POSTGRES_DB: plinth_test
+          POSTGRES_USER: plinth
+          POSTGRES_PASSWORD: plinth_test_password
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Set up Go
+      uses: actions/setup-go@v4
+      with:
+        go-version: '1.21'
+
+    - name: Cache Go modules
+      uses: actions/cache@v3
+      with:
+        path: ~/go/pkg/mod
+        key: ${{ runner.os }}-go-${{ hashFiles('**/go.sum') }}
+        restore-keys: |
+          ${{ runner.os }}-go-
+
+    - name: Download dependencies
+      run: go mod download
+
+    - name: Run tests
+      run: go test -v -race -coverprofile=coverage.txt -covermode=atomic ./...
+      env:
+        DB_HOST: localhost
+        DB_PORT: 5432
+        DB_NAME: plinth_test
+        DB_USER: plinth
+        DB_PASSWORD: plinth_test_password
+
+    - name: Upload coverage
+      uses: codecov/codecov-action@v3
+      with:
+        files: ./coverage.txt
+        flags: unittests
+
+  lint:
+    name: Lint
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Set up Go
+      uses: actions/setup-go@v4
+      with:
+        go-version: '1.21'
+
+    - name: Run golangci-lint
+      uses: golangci/golangci-lint-action@v3
+      with:
+        version: latest
+        args: --timeout=5m
+
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Set up Go
+      uses: actions/setup-go@v4
+      with:
+        go-version: '1.21'
+
+    - name: Build binaries
+      run: make build
+
+    - name: Upload artifacts
+      uses: actions/upload-artifact@v3
+      with:
+        name: binaries
+        path: bin/
+
+  docker:
+    name: Docker Build
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v2
+
+    - name: Build Gateway Image
+      uses: docker/build-push-action@v4
+      with:
+        context: .
+        file: ./deploy/Dockerfile.gateway
+        push: false
+        tags: plinth/gateway:test
+        cache-from: type=gha
+        cache-to: type=gha,mode=max
+
+    - name: Build Datanode Image
+      uses: docker/build-push-action@v4
+      with:
+        context: .
+        file: ./deploy/Dockerfile.datanode
+        push: false
+        tags: plinth/datanode:test
+        cache-from: type=gha
+        cache-to: type=gha,mode=max
+
+    - name: Build Repair Image
+      uses: docker/build-push-action@v4
+      with:
+        context: .
+        file: ./deploy/Dockerfile.repair
+        push: false
+        tags: plinth/repair:test
+        cache-from: type=gha
+        cache-to: type=gha,mode=max
+

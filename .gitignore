@@ -1,0 +1,140 @@
+# Binaries for programs and plugins
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+*.a
+
+# Built binaries (from cmd/)
+gateway
+datanode
+repair
+objctl
+objbench
+
+# Test binary, built with `go test -c`
+*.test
+
+# Output of the go coverage tool
+*.out
+coverage.txt
+coverage.html
+coverage.xml
+*.coverprofile
+
+# Go workspace file
+go.work
+go.work.sum
+
+# Dependency directories
+vendor/
+
+# Build output
+/bin/
+/dist/
+/build/
+*.prof
+*.cpu
+*.mem
+
+# Profiling and debugging
+cpu.out
+mem.out
+*.pprof
+
+# IDE files
+.idea/
+.vscode/
+*.swp
+*.swo
+*.swn
+*~
+.DS_Store
+*.iml
+.project
+.classpath
+.settings/
+.history/
+*.code-workspace
+
+# OS-specific files
+Thumbs.db
+Desktop.ini
+.Spotlight-V100
+.Trashes
+
+# Data directories (local development)
+/data/
+/tmp/
+*.log
+*.db
+*.sqlite
+*.sqlite3
+
+# Docker volumes and data
+/volumes/
+docker-compose.override.yml
+.docker/
+
+# PostgreSQL data
+/postgres-data/
+*.sql.backup
+
+# Node data directories
+/node1/
+/node2/
+/node3/
+
+# Configuration files with secrets
+*.secret
+*.key
+*.pem
+*.crt
+config.local.yaml
+config.local.yml
+.env
+.env.*
+!.env.example
+*.credentials
+
+# Benchmark results
+/benchmarks/results/
+bench.out
+*.bench
+
+# Test fixtures
+/testdata/tmp/
+/testdata/generated/
+
+# Generated files
+*.pb.go
+*.pb.gw.go
+*_generated.go
+wire_gen.go
+
+# Chaos testing artifacts
+/chaos/logs/
+/chaos/results/
+
+# Documentation artifacts
+/docs/_build/
+/docs/.doctrees/
+
+# Kubernetes generated configs
+/deploy/k8s/generated/
+kustomization.yaml.bak
+
+# Helm artifacts
+/deploy/helm/charts/
+/deploy/helm/*.tgz
+
+# Project-specific
+plinth_project_plan.md
+GETTING_STARTED.md.backup
+
+# Temporary download/upload testing
+/uploads/
+/downloads/
+test-*.dat
+*.tmp

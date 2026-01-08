@@ -1,0 +1,38 @@
+# Version control
+.git
+.gitignore
+
+# Build artifacts
+bin/
+dist/
+build/
+*.test
+*.out
+
+# IDE
+.vscode
+.idea
+*.swp
+*.swo
+
+# Data
+data/
+tmp/
+*.log
+
+# Docker
+docker-compose.yml
+Dockerfile*
+
+# Documentation
+docs/
+*.md
+!README.md
+
+# Tests
+*_test.go
+testdata/
+
+# CI
+.github/
+
